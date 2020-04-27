@@ -20,7 +20,7 @@ export default function ProductDetails() {
     } = product;
   
   return (
-      <section className="single-prooduct">
+      <section className="single-product">
         <img src={url} alt={title}
         className="single-product-image" />
         <article>
