@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams, useHistory,  } from 'react-router-dom';
 import { ProductContext } from "../context/products";
-// import { CartContext } from "../context/cart;"
+import { CartContext } from "../context/cart";
 import Loading from "../components/Loading";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const history = useHistory();
-  const { products } = React.useContext(ProductContext);
+  const { products } = useContext(ProductContext);
+  const { addToCart } = useContext(CartContext);
   const product = products.find(item => item.id === parseInt(id));
   if(products.length === 0) {
     return <Loading />;
   } else {
     const { 
-      image:{ url }, 
+      image, 
       title, 
       price, 
       description
@@ -21,7 +22,7 @@ export default function ProductDetails() {
   
   return (
       <section className="single-product">
-        <img src={url} alt={title}
+        <img src={image} alt={title}
         className="single-product-image" />
         <article>
           <h1>{title}</h1>
@@ -30,7 +31,7 @@ export default function ProductDetails() {
           <button 
             className="btn btn-primary btn-block" 
             onClick = {() => {
-                // add to card
+                addToCart(product);
                 history.push('/cart')
             }}
           >
