@@ -8,7 +8,7 @@ export function flattenProducts(data) {
 
         // local setup no deployment
         // let image = `${url}${item.image.url}`;
-        return { ...item, image }
+        return { ...item, image };
     });
 }
 
@@ -18,3 +18,4 @@ export function featuredProducts(data) {
         return item.featured === true;
     })
 }
+
