@@ -10,10 +10,9 @@ import { UserContext } from "../context/user";
 
 export default function Login() {
   const history = useHistory();
-  
+
   // setup user context
-  const value = useContext(UserContext);
-  console.log(value);
+  const {userLogin} = useContext(UserContext);
   
   // state values 
   const [ email, setEmail] = useState("");
@@ -44,9 +43,11 @@ export default function Login() {
       response = await registerUser({ email, password, username })
     }
     if(response) {
-      console.log("success");
       console.log(response);
-      
+      const { jwt:token, user:{username}} = response.data 
+      const newUser = { token, username };
+      userLogin(newUser);
+      history.push("/products");
       
     }
     else {
