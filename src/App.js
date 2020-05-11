@@ -15,39 +15,43 @@ import ProductDetails from './pages/ProductDetails';
 
 // components
 import Header from './components/Header';
+import Alert from './components/Alert';
+
 
 
 export default function App() {
-  return <Router>
-  <Header />
-    <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-      <Route path="/cart">
-        <Cart />
-      </Route>
-      <Route path="/checkout">
-        <Checkout />
-      </Route>
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route exact path="/products">
-        <Products />
-      </Route>
-      <Route 
-        path="/products/:id" 
-        children={<ProductDetails></ProductDetails>}>
-      </Route>
+  return (
+  <Router>
+    <Header />
+    <Alert />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/cart">
+          <Cart />
+        </Route>
+        <Route path="/checkout">
+          <Checkout />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/products">
+          <Products />
+        </Route>
+        <Route 
+          path="/products/:id" 
+          children={<ProductDetails></ProductDetails>}>
+        </Route>
 
 
-      <Route>
-        <Error path="*"/>
-      </Route>
-    </Switch>
-  </Router>;
-}
+        <Route>
+          <Error path="*"/>
+        </Route>
+      </Switch>
+  </Router>
+)}

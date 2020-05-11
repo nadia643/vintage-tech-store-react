@@ -12,7 +12,7 @@ export default function Login() {
   const history = useHistory();
 
   // setup user context
-  const {userLogin} = useContext(UserContext);
+  const { userLogin, alert, showAlert } = useContext(UserContext);
   
   // state values 
   const [ email, setEmail] = useState("");
@@ -20,7 +20,7 @@ export default function Login() {
   const [ username, setUsername] = useState("default");
   const [ isMember, setIsMember] = useState(true);
 
-  let isEmpty = !email || !password || !username;
+  let isEmpty = !email || !password || !username || alert.show;
 
   const toggleMember = () => {
     setIsMember((prevMember) => {
@@ -33,7 +33,9 @@ export default function Login() {
   }
 
   const handleSubmit = async (e) => {
-    // alert
+    showAlert({
+      msg: "Accessing user data. Please wait...."
+    })
     e.preventDefault();
     let response;
     if(isMember) {
@@ -43,21 +45,28 @@ export default function Login() {
       response = await registerUser({ email, password, username })
     }
     if(response) {
-      console.log(response);
-      const { jwt:token, user:{username}} = response.data 
+      const { 
+        jwt: token, 
+        user: { username }
+      } = response.data;
       const newUser = { token, username };
       userLogin(newUser);
+      showAlert({
+        msg: `You are logged in: ${username}. Shop away, my friend.`
+      });
       history.push("/products");
-      
     }
     else {
-      /// show alert
+      showAlert({ 
+        msg: "There was an error. Please try again....",
+        type: "danger"
+    })
     }
   };
 
 
   return (
-    <section className="form-section">
+    <section className="form">
       <h2 className="section-title">{ isMember ? "sign in" : "register" }</h2>
       <form className="login-form">
 

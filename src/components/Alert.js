@@ -8,7 +8,10 @@ export default function Alert() {
 
   let css = "alert-container";
   if (alert.show) {
-    css += " alert-show"
+    css += " alert-show";
+    if(alert.type === "danger") {
+      css += " alert-danger";
+    }
   }
 
 
