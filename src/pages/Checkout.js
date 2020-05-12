@@ -23,24 +23,28 @@ function Checkout(props) {
       .createToken()
       .catch(error => console.log(error));
 
-      const{ token } = response;
+      const { token } = response;
       if(token) {
-        setError('');
+        setError("");
         const { id } = token;
+        
+
         let order = await submitOrder({ 
           name: name, 
-          total: total, 
-          items: cart,
+          Total: total, 
+          Items: cart,
           stripeTokenId: id,
           userToken: user.token
-        })
+        });
 
       if(order) {
         showAlert({ msg: "Your order is complete" });
         clearCart();
+        console.log(order);
         // history.push - navigate to home page once order is complete
         history.push("/");
         return;
+        
       }
       else {
         showAlert({ msg: "There was an error with your order. Please try again!", type: "danger" })
