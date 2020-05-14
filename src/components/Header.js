@@ -13,7 +13,7 @@ export default function Header() {
       <ul>
         <div>
           <li>
-            <Link to="/">Home Page</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/about">About</Link>

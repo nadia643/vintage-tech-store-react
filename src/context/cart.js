@@ -1,8 +1,7 @@
-import React, {useState, useReducer, useEffect, createContext }from "react";
+import React, { useEffect, useReducer, useState, createContext } from "react";
 // import localCart from "../utils/localCart";
 import reducer from "./reducer";
 import { REMOVE, INCREASE, DECREASE, ADD_TO_CART, CLEAR_CART } from "./actions";
-
 function getCartFromLocalStorage() {
   return localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
