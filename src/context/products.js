@@ -37,6 +37,7 @@ export default function ProductProvider({ children }) {
         return () => {
 
         }
+     
     }, []);
 
     const changePage = (index) => {
