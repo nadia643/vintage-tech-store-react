@@ -12,6 +12,16 @@ export default function ProductProvider({ children }) {
     const [products, setProducts] = useState([]);
     const [featured, setFeatured] = useState([]);
 
+    // extra state values
+    const [sorted, setSorted] = useState([]);
+    const [page, setPage] = useState(0);
+    const [filters, setFilters] = useState({
+        search: "",
+        category: 'all',
+        shipping: false,
+        price: "all" 
+    });
+
     useEffect(() => {
         //while the http req is happening, the loading component is true until false below
         setLoading(true);
@@ -28,6 +38,14 @@ export default function ProductProvider({ children }) {
 
         }
     }, []);
+
+    const changePage = (index) => {
+        console.log(index);
+    }
+    const updateFilters = e => {
+        console.log(e);
+        
+    }
     
     return ( <ProductContext.Provider value={{ loading, products, featured }}>
                 { children }
