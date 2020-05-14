@@ -30,6 +30,8 @@ export default function ProductProvider({ children }) {
         .then(response => {
             const featured = featuredProducts(flattenProducts(response.data));
             const products = flattenProducts(response.data);
+
+            setSorted(products);
             setProducts(products);
             setFeatured(featured);
             setLoading(false);
@@ -48,7 +50,17 @@ export default function ProductProvider({ children }) {
         
     }
     
-    return ( <ProductContext.Provider value={{ loading, products, featured }}>
+    return ( <ProductContext.Provider 
+                value={{ 
+                    loading, 
+                    products, 
+                    featured, 
+                    sorted,
+                    page,
+                    filters, 
+                    changePage, 
+                    updateFilters  
+                    }}>
                 { children }
             </ProductContext.Provider>
     );

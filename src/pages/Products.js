@@ -4,12 +4,11 @@ import Loading from "../components/Loading";
 import ProductList from "../components/Products/ProductList";
 
 export default function Products() {
-  const { loading, products } = useContext(ProductContext);
-  console.log(products);
+  const { loading, sorted } = useContext(ProductContext);
   
   if(loading) {
     return <Loading />
   }
   
-  return <ProductList title="our products" products={products} />;
+  return <ProductList title="our products" products={sorted} />;
 }
